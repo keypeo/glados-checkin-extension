@@ -1,0 +1,43 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>GLaDOS Auto Check-in 设置</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 16px; max-width: 700px; }
+    .row { margin-bottom: 10px; }
+    label { display: inline-block; min-width: 150px; }
+    input[type="number"], input[type="text"] { width: 260px; padding: 6px; }
+    button { margin-right: 8px; padding: 8px 12px; }
+    #status { margin-left: 8px; color: #2b6a2b; font-size: 12px; }
+    .hint { color: #666; font-size: 12px; margin-top: 6px; }
+  </style>
+</head>
+<body>
+  <h2>GLaDOS 自动签到设置</h2>
+
+  <div class="row">
+    <div class="hint">插件会在每天首次打开浏览器时自动尝试签到一次，同一天不会重复自动触发。</div>
+  </div>
+
+  <div class="row">
+    <label for="customSelector">自定义按钮选择器</label>
+    <input id="customSelector" type="text" placeholder="可选，例如: button.primary-checkin" />
+    <div class="hint">自动点击失败时填写签到按钮的 CSS 选择器。</div>
+  </div>
+
+  <div class="row">
+    <label></label>
+    <input id="autoCloseTab" type="checkbox" />
+    <span>签到后自动关闭标签页</span>
+  </div>
+
+  <div class="row">
+    <button id="save">保存设置</button>
+    <button id="testNow">立即手动签到</button>
+    <span id="status"></span>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>
