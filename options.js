@@ -23,8 +23,12 @@ async function save() {
 
 async function testNow() {
   show("执行中...");
-  const res = await chrome.runtime.sendMessage({ type: "RUN_NOW" });
-  show(res?.ok ? "已触发签到" : "触发失败");
+  try {
+    const res = await chrome.runtime.sendMessage({ type: "RUN_NOW" });
+    show(res?.ok ? "已触发签到" : "触发失败");
+  } catch (e) {
+    show("触发失败");
+  }
 }
 
 $("save").addEventListener("click", save);
