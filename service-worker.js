@@ -46,7 +46,7 @@ function waitTabLoaded(tabId, timeoutMs = 30000) {
 }
 
 async function clickCheckin(tabId, customSelector) {
-  const [{ result }] = await chrome.scripting.executeScript({
+  const scriptResults = await chrome.scripting.executeScript({
     target: { tabId },
     func: async (selectorFromOptions) => {
       const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -105,7 +105,7 @@ async function clickCheckin(tabId, customSelector) {
     args: [customSelector]
   });
 
-  return result;
+  return scriptResults?.[0]?.result || { ok: false, by: "script_failed" };
 }
 
 async function runCheckin(trigger = "manual") {
