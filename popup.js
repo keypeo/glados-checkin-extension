@@ -13,7 +13,7 @@ async function refreshStatus() {
     return;
   }
 
-  const triggerLabel = lastTrigger === "startup" ? "开机自动" : "手动";
+  const triggerLabel = String(lastTrigger || "").startsWith("startup") ? "开机自动" : "手动";
   const ok = lastResult?.ok ? "成功" : "失败";
   const by = lastResult?.by || "-";
   statusEl.textContent = `最近: ${fmt(lastRunAt)} | ${triggerLabel} | ${ok} | ${by}`;
