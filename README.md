@@ -1,5 +1,11 @@
 # GLaDOS Auto Check-in Extension
 
+每天首次打开浏览器时，自动打开 GLaDOS 签到页并尝试完成签到的浏览器扩展。
+
+## Stargazers Over Time
+
+[![Stargazers over time](https://starchart.cc/keypeo/glados-checkin-extension.svg?variant=adaptive)](https://starchart.cc/keypeo/glados-checkin-extension)
+
 ## 功能
 - 每天首次打开浏览器时自动尝试签到一次（同一天不会重复自动触发）。
 - 支持手动补签（点击插件弹窗中的“立即签到”）。
