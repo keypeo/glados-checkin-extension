@@ -1,14 +1,24 @@
 const CHECKIN_URL = "https://glados.cloud/console/checkin";
 const STARTUP_CHECKIN_DATE_KEY = "startupCheckinDate";
+const DEFAULT_CHECKIN_SELECTOR = "button:has(i.check.icon)";
 const DEFAULTS = {
-  customSelector: "",
+  customSelector: DEFAULT_CHECKIN_SELECTOR,
   autoCloseTab: true
 };
 
 let startupCheckinPromise = null;
 
 async function getConfig() {
-  return chrome.storage.sync.get(DEFAULTS);
+  const config = await chrome.storage.sync.get(DEFAULTS);
+  return {
+    ...config,
+    customSelector: normalizeSelector(config.customSelector)
+  };
+}
+
+function normalizeSelector(selector) {
+  const value = typeof selector === "string" ? selector.trim() : "";
+  return value || DEFAULT_CHECKIN_SELECTOR;
 }
 
 function getTodayLocalDateKey() {
@@ -87,10 +97,11 @@ function waitTabLoaded(tabId, timeoutMs = 30000) {
 async function clickCheckin(tabId, customSelector) {
   const injections = await chrome.scripting.executeScript({
     target: { tabId },
-    func: async (selectorFromOptions) => {
+    func: async (selectorFromOptions, defaultSelector) => {
       const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
       const fallbackSelectors = [
+        defaultSelector,
         "button#checkin",
         "button.checkin",
         "button[class*='check']",
@@ -170,7 +181,7 @@ async function clickCheckin(tabId, customSelector) {
 
       return { ok: false, by: "not_found" };
     },
-    args: [customSelector]
+    args: [customSelector, DEFAULT_CHECKIN_SELECTOR]
   });
 
   return injections?.[0]?.result || { ok: false, by: "script_no_result" };
@@ -251,7 +262,11 @@ async function runStartupCheckinIfNeeded(source = "startup") {
 
 chrome.runtime.onInstalled.addListener(async () => {
   const current = await chrome.storage.sync.get(DEFAULTS);
-  await chrome.storage.sync.set({ ...DEFAULTS, ...current });
+  await chrome.storage.sync.set({
+    ...DEFAULTS,
+    ...current,
+    customSelector: normalizeSelector(current.customSelector)
+  });
 });
 
 chrome.runtime.onStartup.addListener(() => {

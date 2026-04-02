@@ -1,7 +1,7 @@
 ﻿{
   "manifest_version": 3,
   "name": "GLaDOS Auto Check-in",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "每天首次打开浏览器自动签到，并支持手动补签",
   "permissions": ["storage", "tabs", "scripting", "windows"],
   "host_permissions": ["https://glados.cloud/*"],
