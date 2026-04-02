@@ -1,27 +1,27 @@
 # GLaDOS Auto Check-in Extension
 
-每天首次打开浏览器时，自动打开 GLaDOS 签到页并尝试完成签到的浏览器扩展。
+A browser extension that automatically opens the GLaDOS check-in page and attempts to complete the daily check-in the first time you open your browser each day.
 
-## 功能
-- 每天首次打开浏览器时自动尝试签到一次（同一天不会重复自动触发）。
-- 支持手动补签（点击插件弹窗中的“立即签到”）。
-- 支持自定义签到按钮选择器，适配页面结构变化。
+## Features
+- Automatically attempts a check-in the first time you open your browser each day.
+- Supports manual check-in from the extension popup.
+- Supports a custom check-in button selector to handle page structure changes.
 
-## 安装
-1. 打开浏览器扩展页：
+## Installation
+1. Open your browser extensions page:
    - Chrome: `chrome://extensions/`
    - Edge: `edge://extensions/`
-2. 开启“开发者模式”。
-3. 选择“加载已解压的扩展程序”。
-4. 选择此目录：`glados-checkin-extension/glados-checkin-extension`。
+2. Enable Developer Mode.
+3. Choose Load unpacked.
+4. Select this directory: `glados-checkin-extension/glados-checkin-extension`.
 
-## 使用
-- 自动签到：每天首次启动浏览器会自动触发一次。
-- 手动签到：点击扩展图标，在弹窗中点击“立即签到”。
-- 设置页：可配置
-  - 自定义按钮选择器
-  - 签到完成后是否自动关闭标签页
+## Usage
+- Automatic check-in: triggered once when you open the browser for the first time each day.
+- Manual check-in: click the extension icon and then click `Check In Now` in the popup.
+- Options page:
+  - Custom button selector
+  - Automatically close the tab after check-in
 
-## 注意
-- 需要你在 `glados.cloud` 保持登录状态。
-- 若页面按钮结构发生变化，请在设置里填入正确的 CSS 选择器。
+## Notes
+- You must stay logged in on `glados.cloud`.
+- If the page structure changes, update the correct CSS selector in the options page.
